@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="title" content="Video Production Buddy">
+  <meta name="description" content="Video Production Buddy turns an AI coding assistant into a staged, auditable video production studio for creators and developers.">
+  <meta name="keywords" content="Video Production Buddy, OpenMontage, AI video production, agentic workflows, Remotion, HyperFrames, video automation">
+  <meta name="author" content="Video Production Buddy">
+  <meta name="robots" content="index, follow">
+  <meta name="language" content="English">
+  <meta name="theme-color" content="#b9ff2c">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Video Production Buddy">
+  <meta property="og:title" content="Video Production Buddy">
+  <meta property="og:description" content="An agentic video production system for AI creators and developers.">
+  <meta property="og:url" content="https://video-production-buddy.github.io/">
+  <meta property="og:image" content="https://video-production-buddy.github.io/static/images/social_preview.png">
+  <meta property="og:image:width" content="1280">
+  <meta property="og:image:height" content="640">
+  <meta property="og:image:alt" content="Video Production Buddy preview">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Video Production Buddy">
+  <meta name="twitter:description" content="Turn your AI coding assistant into a staged video production studio.">
+  <meta name="twitter:image" content="https://video-production-buddy.github.io/static/images/social_preview.png">
+  <meta name="twitter:image:alt" content="Video Production Buddy preview">
+
+  <link rel="canonical" href="https://video-production-buddy.github.io/">
+  <link rel="icon" type="image/png" href="static/images/favicon.png">
+  <link rel="apple-touch-icon" href="static/images/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;700;800;900&family=IBM+Plex+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="static/css/bulma.min.css">
+  <link rel="stylesheet" href="static/css/index.css">
+
+  <title>Video Production Buddy | Agentic Video Production</title>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareSourceCode",
+    "name": "Video Production Buddy",
+    "description": "An agent-first video production system that uses pipeline manifests, director skills, provider tools, checkpoints, and review gates to produce finished videos from plain-language briefs.",
+    "url": "https://video-production-buddy.github.io/",
+    "codeRepository": "https://github.com/zhouzhoushen/video-production-buddy",
+    "programmingLanguage": ["Python", "TypeScript", "HTML", "CSS"],
+    "isAccessibleForFree": true,
+    "image": "https://video-production-buddy.github.io/static/images/social_preview.png"
+  }
+  </script>
+</head>
+<body>
+  <nav class="navbar is-fixed-top" aria-label="main navigation">
+    <div class="container">
+      <div class="navbar-brand">
+        <a class="navbar-item" href="#top" aria-label="Video Production Buddy home">
+          <img class="navbar-logo" src="static/images/logo.png" alt="">
+          <span>Video Production Buddy</span>
+        </a>
+      </div>
+      <div class="navbar-menu is-active">
+        <div class="navbar-end">
+          <a class="navbar-item" href="#demo">Demo</a>
+          <a class="navbar-item" href="#workflow">Workflow</a>
+          <a class="navbar-item" href="#examples">Examples</a>
+          <a class="navbar-item" href="#quick-start">Quick Start</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <button class="scroll-to-top" onclick="scrollToTop()" title="Scroll to top" aria-label="Scroll to top">
+    <i class="fas fa-chevron-up" aria-hidden="true"></i>
+  </button>
+
+  <main id="top">
+    <section class="hero-shell">
+      <div class="container">
+        <div class="hero-grid">
+          <div>
+            <div class="eyebrow">Agentic video production</div>
+            <h1 class="hero-title">Video Production Buddy</h1>
+            <p class="hero-copy">
+              Turn your AI coding assistant into a full production studio. Give it a brief, and it follows structured pipelines for research, scripting, asset generation, editing, composition, review, and delivery.
+            </p>
+            <div class="cta-row">
+              <a class="button is-primary-buddy" href="https://github.com/zhouzhoushen/video-production-buddy" target="_blank" rel="noopener">
+                <span class="icon"><i class="fab fa-github" aria-hidden="true"></i></span>
+                <span>View GitHub</span>
+              </a>
+              <a class="button is-secondary-buddy" href="#quick-start">
+                <span class="icon"><i class="fas fa-terminal" aria-hidden="true"></i></span>
+                <span>Quick Start</span>
+              </a>
+            </div>
+          </div>
+
+          <aside class="hero-art" aria-label="Video Production Buddy system preview">
+            <div class="hero-art-header">
+              <span>production-board.mov</span>
+              <div class="status-dots" aria-hidden="true"><span></span><span></span><span></span></div>
+            </div>
+            <img src="static/images/showcase.jpg" alt="A cinematic video production showcase frame">
+            <div class="metrics-strip">
+              <div class="metric">
+                <strong>12+</strong>
+                <span>pipelines</span>
+              </div>
+              <div class="metric">
+                <strong>90+</strong>
+                <span>tools</span>
+              </div>
+              <div class="metric">
+                <strong>$0</strong>
+                <span>starter path</span>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section class="section is-wash" id="demo">
+      <div class="container is-max-desktop">
+        <span class="section-kicker">Demo</span>
+        <h2 class="section-title">A real production pipeline, not prompt spaghetti.</h2>
+        <p class="section-lede">
+          Video Production Buddy builds videos through explicit stages. The agent chooses a pipeline, checks real tool availability, asks for approval at creative gates, logs major decisions, and reviews the final render before presenting it.
+        </p>
+        <div class="demo-frame">
+          <video controls muted playsinline poster="static/images/showcase.jpg" preload="metadata">
+            <source src="https://github.com/user-attachments/assets/f77ce7a4-68b8-4f94-a287-e94bf50a32e1" type="video/mp4">
+          </video>
+          <div class="demo-caption">
+            <span><strong>Signal From Tomorrow</strong> — concept, script, motion clips, soundtrack, and composition produced through the pipeline.</span>
+            <a href="https://github.com/zhouzhoushen/video-production-buddy" target="_blank" rel="noopener">Inspect the project</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="workflow">
+      <div class="container">
+        <span class="section-kicker">Workflow</span>
+        <h2 class="section-title">The agent acts like the producer, not just a clip generator.</h2>
+        <p class="section-lede">
+          The system is inherited from the OpenMontage architecture: pipeline manifests define what happens, director skills define how each stage should be executed, and Python tools handle concrete media work.
+        </p>
+        <div class="workflow-grid">
+          <article class="workflow-card">
+            <span class="card-index">01</span>
+            <h3>Choose the pipeline</h3>
+            <p>The agent matches the brief to a production path such as animated explainer, screen demo, documentary montage, ad video, or cinematic trailer.</p>
+          </article>
+          <article class="workflow-card">
+            <span class="card-index">02</span>
+            <h3>Plan before spending</h3>
+            <p>Research, proposals, provider choices, render runtime options, and cost estimates are surfaced before consequential generation calls.</p>
+          </article>
+          <article class="workflow-card">
+            <span class="card-index">03</span>
+            <h3>Generate with structure</h3>
+            <p>Scripts, scene plans, voice, music, images, motion clips, captions, and edits are produced as auditable artifacts.</p>
+          </article>
+          <article class="workflow-card">
+            <span class="card-index">04</span>
+            <h3>Review the render</h3>
+            <p>Quality gates check timing, audio, black frames, subtitles, provider consistency, and whether the output matches the approved promise.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section is-wash">
+      <div class="container">
+        <span class="section-kicker">System</span>
+        <h2 class="section-title">Built for AI coding assistants.</h2>
+        <div class="capability-grid">
+          <article class="capability-card">
+            <h3>Instruction-first orchestration</h3>
+            <p>The coding assistant reads manifests and stage skills. There is no hidden Python orchestrator making creative decisions behind the scenes.</p>
+          </article>
+          <article class="capability-card">
+            <h3>Local and cloud media tools</h3>
+            <p>Use FFmpeg, Remotion, HyperFrames, stock media, local TTS, and optional provider APIs for images, video, voice, and music.</p>
+          </article>
+          <article class="capability-card">
+            <h3>Checkpointed production state</h3>
+            <p>Each stage leaves artifacts and decisions behind, so long video jobs can be resumed and audited instead of restarted from scratch.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="examples">
+      <div class="container">
+        <span class="section-kicker">Examples</span>
+        <h2 class="section-title">Several paths to a finished video.</h2>
+        <div class="example-grid">
+          <article class="example-card">
+            <h3>Zero-key explainers</h3>
+            <p>Render animated charts, typography, narration, and captions with local tooling and no paid media generation APIs.</p>
+          </article>
+          <article class="example-card">
+            <h3>Real-footage montages</h3>
+            <p>Build documentary-style edits from free and open sources such as Archive.org, NASA, Wikimedia Commons, and stock providers.</p>
+          </article>
+          <article class="example-card">
+            <h3>Cloud-powered launches</h3>
+            <p>When keys are available, route to image, video, voice, and music providers for cinematic trailers, product videos, and ads.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section is-wash" id="quick-start">
+      <div class="container is-max-desktop">
+        <span class="section-kicker">Quick Start</span>
+        <h2 class="section-title">Clone, set up, then brief your agent.</h2>
+        <p class="section-lede">
+          Open the project in Codex, Claude Code, Cursor, Copilot, or another AI coding assistant that can read files and run commands.
+        </p>
+        <div class="terminal" role="region" aria-label="Quick start commands">
+          <div class="terminal-header">
+            <span>shell</span>
+            <span>video-production-buddy</span>
+          </div>
+          <pre><code>git clone https://github.com/zhouzhoushen/video-production-buddy.git
+cd video-production-buddy
+make setup
+
+# Then ask your coding assistant:
+"Make a 60-second animated explainer about how neural networks learn"</code></pre>
+        </div>
+        <p class="note">
+          The project repository is currently private. The link and commands are ready for collaborators with access, and they will work for public visitors once the repository is made public.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container is-max-desktop">
+      <p>
+        Video Production Buddy is built from the OpenMontage agentic video production architecture.
+        This website is based on the
+        <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank" rel="noopener">Academic Project Page Template</a>,
+        which was adopted from the <a href="https://nerfies.github.io" target="_blank" rel="noopener">Nerfies</a> project page.
+        Website source is licensed under
+        <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">Creative Commons Attribution-ShareAlike 4.0 International</a>.
+      </p>
+    </div>
+  </footer>
+
+  <script defer src="static/js/fontawesome.all.min.js"></script>
+  <script defer src="static/js/index.js"></script>
+</body>
+</html>
