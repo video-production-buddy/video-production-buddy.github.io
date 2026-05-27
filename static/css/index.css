@@ -131,10 +131,11 @@ a {
 }
 
 .hero-copy {
-  max-width: 690px;
-  color: var(--muted);
-  font-size: clamp(1.08rem, 2vw, 1.32rem);
-  line-height: 1.6;
+  max-width: 580px;
+  color: var(--ink);
+  font-size: clamp(1.45rem, 2.9vw, 2.25rem);
+  font-weight: 900;
+  line-height: 1.08;
 }
 
 .cta-row {
@@ -146,7 +147,7 @@ a {
 
 .star-callout {
   display: grid;
-  grid-template-columns: auto minmax(0, 1fr) auto;
+  grid-template-columns: auto minmax(0, 1fr);
   gap: 0.75rem;
   align-items: center;
   max-width: 680px;
@@ -176,16 +177,6 @@ a {
   font-size: 0.96rem;
   font-weight: 800;
   line-height: 1.35;
-}
-
-.star-callout a {
-  color: var(--ink);
-  font-family: "IBM Plex Mono", monospace;
-  font-size: 0.78rem;
-  font-weight: 800;
-  text-decoration: underline;
-  text-underline-offset: 3px;
-  white-space: nowrap;
 }
 
 .button {
@@ -228,40 +219,13 @@ a {
   background: var(--panel);
   box-shadow: var(--shadow);
   overflow: hidden;
-  transform: rotate(1.2deg);
+  transform: rotate(0.65deg);
 }
-
-.hero-art-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  border-bottom: 1px solid var(--ink);
-  padding: 0.7rem 0.85rem;
-  font-family: "IBM Plex Mono", monospace;
-  font-size: 0.78rem;
-  font-weight: 700;
-}
-
-.status-dots {
-  display: flex;
-  gap: 0.35rem;
-}
-
-.status-dots span {
-  width: 10px;
-  height: 10px;
-  border: 1px solid var(--ink);
-  border-radius: 50%;
-}
-
-.status-dots span:nth-child(1) { background: var(--coral); }
-.status-dots span:nth-child(2) { background: var(--amber); }
-.status-dots span:nth-child(3) { background: var(--lime); }
 
 .hero-art img {
   display: block;
   width: 100%;
-  aspect-ratio: 8 / 3;
+  aspect-ratio: 5 / 2;
   object-fit: cover;
 }
 
@@ -600,24 +564,27 @@ a {
     width: 100%;
   }
 
-  .star-callout {
-    grid-template-columns: auto minmax(0, 1fr);
-  }
-
-  .star-callout a {
-    grid-column: 2;
-  }
-
   .metrics-strip {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
   .metric {
-    border-right: 0;
-    border-bottom: 1px solid var(--ink);
+    padding: 0.72rem 0.55rem;
+    border-right: 1px solid var(--ink);
+    border-bottom: 0;
   }
 
   .metric:last-child {
-    border-bottom: 0;
+    border-right: 0;
+  }
+
+  .metric strong {
+    font-size: 1.15rem;
+  }
+
+  .metric span {
+    display: block;
+    font-size: 0.64rem;
+    line-height: 1.25;
   }
 }
