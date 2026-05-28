@@ -411,6 +411,7 @@ a {
 }
 
 .workflow-grid,
+.spotlight-grid,
 .example-grid,
 .capability-grid {
   display: grid;
@@ -418,16 +419,59 @@ a {
   margin-top: 2rem;
 }
 
-.workflow-grid {
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+.feature-cluster {
+  margin-top: 2.75rem;
 }
 
+.feature-heading {
+  max-width: 760px;
+  margin-bottom: 1rem;
+}
+
+.feature-label {
+  display: inline-flex;
+  align-items: center;
+  min-height: 1.8rem;
+  margin-bottom: 0.7rem;
+  padding: 0.25rem 0.65rem;
+  border: 1px solid var(--ink);
+  border-radius: 999px;
+  background: var(--lime);
+  color: var(--ink);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.74rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.feature-heading h3 {
+  margin: 0;
+  color: var(--ink);
+  font-size: clamp(1.55rem, 2.8vw, 2.35rem);
+  font-weight: 900;
+  line-height: 1.05;
+}
+
+.feature-cluster .workflow-grid,
+.feature-cluster .spotlight-grid,
+.feature-cluster .example-grid,
+.feature-cluster .capability-grid {
+  margin-top: 0;
+}
+
+.workflow-grid {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  align-items: stretch;
+}
+
+.spotlight-grid,
 .example-grid,
 .capability-grid {
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
 .workflow-card,
+.spotlight-card,
 .example-card,
 .capability-card {
   border: 1px solid var(--ink);
@@ -438,7 +482,9 @@ a {
 }
 
 .workflow-card {
-  min-height: 210px;
+  min-height: 260px;
+  display: flex;
+  flex-direction: column;
 }
 
 .card-index {
@@ -456,6 +502,7 @@ a {
 }
 
 .workflow-card h3,
+.spotlight-card h3,
 .example-card h3,
 .capability-card h3 {
   color: var(--ink);
@@ -466,9 +513,132 @@ a {
 }
 
 .workflow-card p,
+.spotlight-card p,
 .example-card p,
 .capability-card p {
   color: var(--muted);
+}
+
+.spotlight-board {
+  position: relative;
+  margin-top: 0.25rem;
+  padding: 1.25rem 0 0.1rem;
+  isolation: isolate;
+}
+
+.spotlight-board::before {
+  content: "";
+  position: absolute;
+  inset: -1.15rem calc(50% - 50vw) -1.6rem;
+  z-index: -1;
+  background:
+    linear-gradient(90deg, rgba(185, 255, 44, 0.12), transparent 34%, rgba(255, 79, 63, 0.08) 70%, transparent),
+    repeating-linear-gradient(135deg, rgba(21, 19, 15, 0.04) 0 1px, transparent 1px 18px);
+  border-top: 1px solid rgba(21, 19, 15, 0.08);
+  border-bottom: 1px solid rgba(21, 19, 15, 0.08);
+}
+
+.spotlight-grid {
+  counter-reset: spotlight;
+}
+
+.spotlight-card {
+  --accent: var(--lime);
+  --accent-ink: var(--ink);
+  position: relative;
+  min-height: 238px;
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid var(--ink);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(255, 255, 255, 0.9)),
+    var(--panel);
+  overflow: hidden;
+  counter-increment: spotlight;
+  transition: transform var(--fast), box-shadow var(--fast), background var(--fast);
+}
+
+.spotlight-card::before {
+  content: "0" counter(spotlight);
+  position: absolute;
+  top: 0.85rem;
+  right: 1rem;
+  color: rgba(21, 19, 15, 0.08);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: clamp(2.4rem, 5vw, 4.4rem);
+  font-weight: 800;
+  line-height: 0.8;
+  pointer-events: none;
+}
+
+.spotlight-card::after {
+  content: "";
+  position: absolute;
+  inset: auto 1.25rem 0 1.25rem;
+  height: 5px;
+  background: var(--accent);
+  border: 1px solid var(--ink);
+  border-bottom: 0;
+}
+
+.spotlight-card:hover {
+  transform: translate(-3px, -3px);
+  box-shadow: 9px 9px 0 rgba(21, 19, 15, 0.18);
+}
+
+.spotlight-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.35rem;
+  height: 2.35rem;
+  margin-bottom: 0.85rem;
+  border: 1px solid var(--ink);
+  border-radius: 50%;
+  background: var(--accent);
+  color: var(--accent-ink);
+  font-size: 0.95rem;
+  box-shadow: 4px 4px 0 var(--ink);
+}
+
+.spotlight-tag {
+  width: fit-content;
+  margin-bottom: 0.72rem;
+  padding: 0.14rem 0.55rem;
+  border-left: 4px solid var(--accent);
+  background: rgba(21, 19, 15, 0.045);
+  color: var(--muted);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.spotlight-card h3,
+.spotlight-card p,
+.spotlight-icon,
+.spotlight-tag {
+  position: relative;
+  z-index: 1;
+}
+
+.spotlight-card:nth-child(3n + 2) .spotlight-icon {
+  --accent: var(--coral);
+  --accent-ink: var(--paper);
+}
+
+.spotlight-card:nth-child(3n) .spotlight-icon {
+  --accent: var(--amber);
+}
+
+.spotlight-card:nth-child(3n + 2) {
+  --accent: var(--coral);
+  --accent-ink: var(--paper);
+}
+
+.spotlight-card:nth-child(3n) {
+  --accent: var(--amber);
 }
 
 .capability-card {
@@ -569,9 +739,17 @@ a {
   transform: translate(-2px, -2px);
 }
 
+@media screen and (max-width: 1180px) {
+  .workflow-grid,
+  .spotlight-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
 @media screen and (max-width: 980px) {
   .hero-grid,
   .workflow-grid,
+  .spotlight-grid,
   .example-grid,
   .capability-grid,
   .demo-grid {

@@ -63,9 +63,8 @@
       </div>
       <div class="navbar-menu is-active">
         <div class="navbar-end">
-          <a class="navbar-item" href="#demo">Demo</a>
-          <a class="navbar-item" href="#workflow">Workflow</a>
-          <a class="navbar-item" href="#examples">Examples</a>
+          <a class="navbar-item" href="#gallery">Gallery</a>
+          <a class="navbar-item" href="#features">Features &amp; Highlights</a>
           <a class="navbar-item" href="#quick-start">Quick Start</a>
         </div>
       </div>
@@ -131,20 +130,19 @@
       </div>
     </section>
 
-    <section class="section is-wash" id="demo">
+    <section class="section is-wash" id="gallery">
       <div class="container is-max-desktop">
-        <span class="section-kicker">Demo</span>
-        <h2 class="section-title">A real production pipeline, not prompt spaghetti.</h2>
+        <span class="section-kicker">Gallery</span>
+        <h2 class="section-title">What it makes.</h2>
         <p class="section-lede">
-          Video Production Buddy builds videos through explicit stages. The agent chooses a pipeline, checks real tool availability, asks for approval at creative gates, logs major decisions, and reviews the final render before presenting it.
+          From launch reels to cinematic scenes.
         </p>
         <div class="demo-frame">
           <video controls muted playsinline poster="static/images/demo1_poster.jpg" preload="none">
             <source src="https://github.com/video-production-buddy/video-production-buddy.github.io/releases/download/demo-assets-v1/demo1.mp4" type="video/mp4">
           </video>
           <div class="demo-caption">
-            <span><strong>Anime story sample</strong> — a full motion demo hosted as a GitHub Release asset, keeping the Pages branch lightweight.</span>
-            <a href="https://github.com/video-production-buddy/video-production-buddy.github.io/releases/tag/demo-assets-v1" target="_blank" rel="noopener">Release assets</a>
+            <span><strong>Anime story</strong> — A stylized narrative scene with character motion, mood, and story pacing.</span>
           </div>
         </div>
         <div class="demo-grid" aria-label="More Video Production Buddy demos">
@@ -153,103 +151,120 @@
               <source src="https://github.com/video-production-buddy/video-production-buddy.github.io/releases/download/demo-assets-v1/demo2.mp4" type="video/mp4">
             </video>
             <h3>Vertical launch reel</h3>
-            <p>Short-form composition for mobile-first social playback.</p>
+            <p>A mobile-first launch cut built for fast product storytelling.</p>
           </article>
           <article class="demo-card">
             <video controls muted playsinline poster="static/images/demo3_poster.jpg" preload="none">
               <source src="https://github.com/video-production-buddy/video-production-buddy.github.io/releases/download/demo-assets-v1/demo3.mp4" type="video/mp4">
             </video>
-            <h3>Product teaser setup</h3>
-            <p>A quiet product-open sequence with captions and cinematic pacing.</p>
+            <h3>Product teaser</h3>
+            <p>A polished product open with captions, rhythm, and commercial pacing.</p>
           </article>
           <article class="demo-card">
             <video controls muted playsinline poster="static/images/demo4_poster.jpg" preload="none">
               <source src="https://github.com/video-production-buddy/video-production-buddy.github.io/releases/download/demo-assets-v1/demo4.mp4" type="video/mp4">
             </video>
             <h3>Macro product detail</h3>
-            <p>Close-up commercial language for premium hardware storytelling.</p>
+            <p>Close-up visual language for premium hardware and tactile detail.</p>
           </article>
           <article class="demo-card">
             <video controls muted playsinline poster="static/images/demo5_poster.jpg" preload="none">
               <source src="https://github.com/video-production-buddy/video-production-buddy.github.io/releases/download/demo-assets-v1/demo5.mp4" type="video/mp4">
             </video>
-            <h3>Cinematic scene sample</h3>
-            <p>Live-action style scene construction with atmosphere and dialogue framing.</p>
+            <h3>Cinematic scene</h3>
+            <p>A live-action style moment with atmosphere, staging, and dialogue framing.</p>
           </article>
         </div>
       </div>
     </section>
 
-    <section class="section" id="workflow">
+    <section class="section" id="features">
       <div class="container">
-        <span class="section-kicker">Workflow</span>
-        <h2 class="section-title">The agent acts like the producer, not just a clip generator.</h2>
+        <span class="section-kicker">Features &amp; Highlights</span>
+        <h2 class="section-title">From idea to finished video, one checked stage at a time.</h2>
         <p class="section-lede">
-          The system is inherited from the OpenMontage architecture: pipeline manifests define what happens, director skills define how each stage should be executed, and Python tools handle concrete media work.
+          Video Production Buddy guides the assistant to clarify, plan, and confirm the production direction before costly AIGC generation. The result is a workflow creators can steer and builders can audit.
         </p>
-        <div class="workflow-grid">
-          <article class="workflow-card">
-            <span class="card-index">01</span>
-            <h3>Choose the pipeline</h3>
-            <p>The agent matches the brief to a production path such as animated explainer, screen demo, documentary montage, ad video, or cinematic trailer.</p>
-          </article>
-          <article class="workflow-card">
-            <span class="card-index">02</span>
-            <h3>Plan before spending</h3>
-            <p>Research, proposals, provider choices, render runtime options, and cost estimates are surfaced before consequential generation calls.</p>
-          </article>
-          <article class="workflow-card">
-            <span class="card-index">03</span>
-            <h3>Generate with structure</h3>
-            <p>Scripts, scene plans, voice, music, images, motion clips, captions, and edits are produced as auditable artifacts.</p>
-          </article>
-          <article class="workflow-card">
-            <span class="card-index">04</span>
-            <h3>Review the render</h3>
-            <p>Quality gates check timing, audio, black frames, subtitles, provider consistency, and whether the output matches the approved promise.</p>
-          </article>
-        </div>
-      </div>
-    </section>
 
-    <section class="section is-wash">
-      <div class="container">
-        <span class="section-kicker">System</span>
-        <h2 class="section-title">Built for AI coding assistants.</h2>
-        <div class="capability-grid">
-          <article class="capability-card">
-            <h3>Instruction-first orchestration</h3>
-            <p>The coding assistant reads manifests and stage skills. There is no hidden Python orchestrator making creative decisions behind the scenes.</p>
-          </article>
-          <article class="capability-card">
-            <h3>Local and cloud media tools</h3>
-            <p>Use FFmpeg, Remotion, HyperFrames, stock media, local TTS, and optional provider APIs for images, video, voice, and music.</p>
-          </article>
-          <article class="capability-card">
-            <h3>Checkpointed production state</h3>
-            <p>Each stage leaves artifacts and decisions behind, so long video jobs can be resumed and audited instead of restarted from scratch.</p>
-          </article>
+        <div class="feature-cluster">
+          <div class="feature-heading">
+            <span class="feature-label">Workflow</span>
+            <h3>A guided production path, not a blind prompt.</h3>
+          </div>
+          <div class="workflow-grid">
+            <article class="workflow-card">
+              <span class="card-index">01</span>
+              <h3>Idea intake</h3>
+              <p>Start from a plain-language request, such as a product launch, brand ad, story scene, explainer, or social video.</p>
+            </article>
+            <article class="workflow-card">
+              <span class="card-index">02</span>
+              <h3>Guided clarification</h3>
+              <p>The assistant collects style, audience, duration, budget, core message, product facts, and must-keep constraints before production starts.</p>
+            </article>
+            <article class="workflow-card">
+              <span class="card-index">03</span>
+              <h3>Script &amp; scene design</h3>
+              <p>It turns the brief into scripts, scene plans, shot ideas, emotional beats, and visual constraints with feedback points along the way.</p>
+            </article>
+            <article class="workflow-card">
+              <span class="card-index">04</span>
+              <h3>Asset generation &amp; editing</h3>
+              <p>AI-generated clips, images, voice, music, captions, and local editing tools are coordinated as structured production artifacts.</p>
+            </article>
+            <article class="workflow-card">
+              <span class="card-index">05</span>
+              <h3>Final synthesis</h3>
+              <p>The system assembles the final video, reviews visible quality, and keeps the production decisions traceable for handoff or revision.</p>
+            </article>
+          </div>
         </div>
-      </div>
-    </section>
 
-    <section class="section" id="examples">
-      <div class="container">
-        <span class="section-kicker">Examples</span>
-        <h2 class="section-title">Several paths to a finished video.</h2>
-        <div class="example-grid">
-          <article class="example-card">
-            <h3>Zero-key explainers</h3>
-            <p>Render animated charts, typography, narration, and captions with local tooling and no paid media generation APIs.</p>
-          </article>
-          <article class="example-card">
-            <h3>Real-footage montages</h3>
-            <p>Build documentary-style edits from free and open sources such as Archive.org, NASA, Wikimedia Commons, and stock providers.</p>
-          </article>
-          <article class="example-card">
-            <h3>Cloud-powered launches</h3>
-            <p>When keys are available, route to image, video, voice, and music providers for cinematic trailers, product videos, and ads.</p>
-          </article>
+        <div class="feature-cluster">
+          <div class="feature-heading">
+            <span class="feature-label">Spotlight</span>
+            <h3>The project focuses on the decisions that make AI video controllable.</h3>
+          </div>
+          <div class="spotlight-board">
+            <div class="spotlight-grid">
+              <article class="spotlight-card">
+                <span class="spotlight-icon" aria-hidden="true"><i class="fas fa-route"></i></span>
+                <span class="spotlight-tag">Pathways</span>
+                <h3>Multiple production pipelines</h3>
+                <p>Route different briefs through purpose-built paths, including the new ad-video workflow for commercial storytelling.</p>
+              </article>
+              <article class="spotlight-card">
+                <span class="spotlight-icon" aria-hidden="true"><i class="fas fa-clipboard-check"></i></span>
+                <span class="spotlight-tag">Intake</span>
+                <h3>Guided requirement forms</h3>
+                <p>Collect needs through structured prompts and form-style feedback so users do not have to hold every detail in a chat thread.</p>
+              </article>
+              <article class="spotlight-card">
+                <span class="spotlight-icon" aria-hidden="true"><i class="fas fa-search"></i></span>
+                <span class="spotlight-tag">Research</span>
+                <h3>Trend + reference analysis</h3>
+                <p>Search current topics and analyze high-performing references before committing to a concept, rhythm, or visual hook.</p>
+              </article>
+              <article class="spotlight-card">
+                <span class="spotlight-icon" aria-hidden="true"><i class="fas fa-check-circle"></i></span>
+                <span class="spotlight-tag">Gates</span>
+                <h3>Explicit confirmation gates</h3>
+                <p>Surface style choices, product facts, scene promises, and expensive generation steps for approval before they become sunk cost.</p>
+              </article>
+              <article class="spotlight-card">
+                <span class="spotlight-icon" aria-hidden="true"><i class="fas fa-wave-square"></i></span>
+                <span class="spotlight-tag">Rhythm</span>
+                <h3>Emotion/rhythm control</h3>
+                <p>Make pacing, emotional beats, captions, music, and scene transitions first-class creative controls instead of afterthoughts.</p>
+              </article>
+              <article class="spotlight-card">
+                <span class="spotlight-icon" aria-hidden="true"><i class="fas fa-layer-group"></i></span>
+                <span class="spotlight-tag">Continuity</span>
+                <h3>Cross-clip consistency</h3>
+                <p>Keep characters, objects, style, and scene constraints explicit so multi-shot videos stay coherent across generated segments.</p>
+              </article>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -257,9 +272,9 @@
     <section class="section is-wash" id="quick-start">
       <div class="container is-max-desktop">
         <span class="section-kicker">Quick Start</span>
-        <h2 class="section-title">Clone, set up, then brief your agent.</h2>
+        <h2 class="section-title">Set up in minutes. Start producing now.</h2>
         <p class="section-lede">
-          Open the project in Codex, Claude Code, Cursor, Copilot, or another AI coding assistant that can read files and run commands.
+          No new workflow to learn. Open the repo with Claude Code, Codex, Cursor, Copilot, Windsurf, or an OpenClaw-style agent and start producing.
         </p>
         <div class="terminal" role="region" aria-label="Quick start commands">
           <div class="terminal-header">
@@ -270,12 +285,9 @@
 cd video-production-buddy
 make setup
 
-# Then ask your coding assistant:
-"Make a 60-second animated explainer about how neural networks learn"</code></pre>
+# Then ask your AI assistant:
+"Create a 60-second commercial video for the 14-inch Apple MacBook Pro equipped with the M5 chip."</code></pre>
         </div>
-        <p class="note">
-          The project repository is currently private. The link and commands are ready for collaborators with access, and they will work for public visitors once the repository is made public.
-        </p>
       </div>
     </section>
   </main>
@@ -283,7 +295,6 @@ make setup
   <footer class="footer">
     <div class="container is-max-desktop">
       <p>
-        Video Production Buddy is built from the OpenMontage agentic video production architecture.
         This website is based on the
         <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank" rel="noopener">Academic Project Page Template</a>,
         which was adopted from the <a href="https://nerfies.github.io" target="_blank" rel="noopener">Nerfies</a> project page.
