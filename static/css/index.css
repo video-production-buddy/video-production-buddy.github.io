@@ -28,7 +28,7 @@ body {
     var(--paper);
   background-size: 38px 38px;
   color: var(--ink);
-  font-family: "Archivo", "Helvetica Neue", sans-serif;
+  font-family: "Archivo", "Noto Sans SC", "Microsoft YaHei", "PingFang SC", "Helvetica Neue", sans-serif;
   font-size: 17px;
   line-height: 1.65;
   -webkit-font-smoothing: antialiased;
@@ -44,9 +44,26 @@ a {
   backdrop-filter: blur(18px);
 }
 
+.navbar > .container {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.navbar-brand {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
 .navbar-brand .navbar-item {
   gap: 0.65rem;
   font-weight: 800;
+}
+
+.navbar-brand .navbar-item span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .navbar-logo {
@@ -56,6 +73,7 @@ a {
 }
 
 .navbar-menu {
+  flex: 0 0 auto;
   background: transparent;
 }
 
@@ -68,6 +86,41 @@ a {
 .navbar-item:focus {
   background: transparent;
   color: var(--ink);
+}
+
+.language-switcher {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 0.2rem;
+  padding: 0.18rem;
+  border: 1px solid var(--ink);
+  border-radius: var(--radius);
+  background: var(--panel);
+  box-shadow: 3px 3px 0 rgba(21, 19, 15, 0.14);
+}
+
+.language-button {
+  min-width: 2.55rem;
+  min-height: 2rem;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  font-family: "IBM Plex Mono", "Noto Sans SC", monospace;
+  font-size: 0.78rem;
+  font-weight: 800;
+}
+
+.language-button.is-active {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.language-button:focus-visible {
+  outline: 2px solid var(--coral);
+  outline-offset: 2px;
 }
 
 .hero-shell {
@@ -273,11 +326,17 @@ a {
 .traffic-lights span:nth-child(2) { background: var(--amber); }
 .traffic-lights span:nth-child(3) { background: var(--lime); }
 
-.hero-art img {
+.hero-art img,
+.hero-art video {
   display: block;
   width: 100%;
   aspect-ratio: 5 / 2;
   object-fit: cover;
+}
+
+.hero-art .hero-banner-video {
+  background: var(--panel);
+  object-fit: contain;
 }
 
 .metrics-strip {
@@ -771,8 +830,28 @@ a {
     font-size: 16px;
   }
 
+  .navbar > .container {
+    gap: 0.45rem;
+  }
+
+  .navbar-brand .navbar-item {
+    gap: 0.45rem;
+    padding-right: 0.35rem;
+  }
+
+  .navbar-brand .navbar-item span {
+    max-width: calc(100vw - 178px);
+    font-size: 0.88rem;
+  }
+
   .navbar-menu {
     display: none !important;
+  }
+
+  .language-button {
+    min-width: 2.25rem;
+    min-height: 1.85rem;
+    font-size: 0.72rem;
   }
 
   .hero-shell,
