@@ -1,0 +1,12 @@
+dist
+node_modules
+.github
+.changeset
+local
+output
+.superpowers
+.codex
+.agents
+.astro
+public
+docs/ASTROWIND-UPSTREAM.md

@@ -1,0 +1,462 @@
+---
+import Hero from '~/components/widgets/Hero.astro';
+import Video from '~/components/widgets/Video.astro';
+import Content from '~/components/widgets/Content.astro';
+import Features from '~/components/widgets/Features.astro';
+import QuickStart from '~/components/widgets/QuickStart.astro';
+import FAQs from '~/components/widgets/FAQs.astro';
+import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
+import Headline from '~/components/ui/Headline.astro';
+import PageLayout from '~/layouts/PageLayout.astro';
+import StructuredData from '~/components/common/StructuredData.astro';
+import { SITE } from 'astrowind:config';
+import { getCanonical, getPermalink, getAsset } from '~/utils/permalinks';
+
+interface Props {
+  language: 'en' | 'zh-CN';
+}
+const { language } = Astro.props;
+const zh = language === 'zh-CN';
+const t = (en: string, cn: string) => (zh ? cn : en);
+const repo = 'https://github.com/video-production-buddy/video-production-buddy';
+const source = `${repo}/blob/52a384b32e07d8deffc8593480130790bfad6ede`;
+const media =
+  'https://github.com/video-production-buddy/video-production-buddy.github.io/releases/download/demo-assets-v1';
+const description = t(
+  'An open-source AI video production assistant. Shape the brief, ground creative decisions, and review delivery against your intent.',
+  '开源 AI 视频制作助手。确认创作需求，为创意提供依据，将关键要求带到最终交付。'
+);
+const demos = [
+  {
+    id: 1,
+    title: t('Anime story', '动画叙事'),
+    text: t('Character, atmosphere and narrative pacing.', '角色、氛围与叙事节奏。'),
+  },
+  {
+    id: 2,
+    title: t('Vertical launch reel', '竖屏产品短片'),
+    text: t('A product story made for the mobile screen.', '面向移动端的产品故事。'),
+  },
+  {
+    id: 4,
+    title: t('Macro product detail', '微距产品细节'),
+    text: t('Material, light and close-up visual language.', '材质、光线与近景视觉语言。'),
+  },
+  {
+    id: 5,
+    title: t('Cinematic scene', '电影感场景'),
+    text: t('Staging, mood and dialogue framing.', '场面调度、情绪与对话构图。'),
+  },
+];
+
+const title = t('Video Production Buddy — Keep your vision in the picture', '织影 — 让创作意图，贯穿每一步');
+const metadata = {
+  title,
+  description,
+  ignoreTitleTemplate: true,
+  openGraph: { type: 'website', locale: zh ? 'zh_CN' : 'en_US' },
+};
+---
+
+<PageLayout language={language} metadata={metadata}>
+  <Fragment slot="head">
+    <link rel="alternate" hreflang="en" href={getCanonical(getPermalink('/'))} />
+    <link rel="alternate" hreflang="zh-CN" href={getCanonical(getPermalink('/zh/'))} />
+    <link rel="alternate" hreflang="x-default" href={getCanonical(getPermalink('/'))} />
+    <StructuredData
+      schema={{
+        '@context': 'https://schema.org',
+        '@type': 'WebSite',
+        name: SITE.name,
+        url: SITE.site,
+        inLanguage: ['en', 'zh-CN'],
+      }}
+    />
+  </Fragment>
+
+  <Hero
+    id="top"
+    badge={t('Open-source AI video production', '开源 AI 视频制作助手')}
+    actions={[
+      {
+        text: t('Start creating', '开始创作'),
+        href: '#quick-start',
+        variant: 'primary',
+        icon: 'tabler:arrow-up-right',
+      },
+      { text: t('Explore the workflow', '了解制作流程'), href: '#why-vpb' },
+    ]}
+  >
+    <Fragment slot="bg"
+      ><div class="absolute inset-0 bg-radial-[ellipse_at_top] from-primary/5 to-transparent to-65%"></div></Fragment
+    >
+    <Fragment slot="title"
+      >{t('Keep your vision', '让创作意图，')}<br /><span class="text-accent"
+        >{t('in the picture.', '贯穿每一步。')}</span
+      ></Fragment
+    >
+    <Fragment slot="subtitle"
+      >{
+        t(
+          'Shape the brief. Ground the creative choices. Review what gets made. An AI video production assistant that keeps you involved in the decisions that matter.',
+          '从需求澄清、创意研究到交付检查，织影让你参与关键选择，把确认过的方向逐步落实成片。'
+        )
+      }</Fragment
+    >
+    <Fragment slot="content"
+      ><p class="mt-7 text-xs tracking-[.16em] text-muted uppercase">
+        {t('AI-driven, human-curated', 'AI 驱动，人主导')}
+      </p></Fragment
+    >
+    <Fragment slot="image">
+      <figure class="overflow-hidden rounded-2xl border border-default/15 bg-page shadow-2xl">
+        <div
+          class="flex justify-between gap-4 px-3 py-3 text-[10px] tracking-wide text-muted sm:px-5 sm:text-xs [&>span:first-child]:text-primary"
+        >
+          <span>{t('VPB / SELECTED FILM 003', '织影 / 精选短片 003')}</span><span
+            >{t('Product teaser · existing project demo', '产品短片 · 项目已有示例')}</span
+          >
+        </div>
+        <Video
+          src={`${media}/demo3.mp4`}
+          videoTitle={t('Product teaser', '产品短片')}
+          poster={`<img src="${getAsset('/static/images/demo3_poster.jpg')}" alt="" width="1920" height="1080" fetchpriority="high" class="absolute inset-0 h-full w-full object-cover" />`}
+          playLabel={t('Play video', '播放视频')}
+          classes={{ container: 'p-0 md:p-0 lg:p-0' }}
+        />
+      </figure>
+    </Fragment>
+  </Hero>
+  <WidgetWrapper id="why-vpb" containerClass="pb-0 md:pb-0 lg:pb-0 max-w-5xl">
+    <Headline
+      tagline={t('From intention to execution', '从创作意图，到具体执行')}
+      title={t('A closer connection between<br />the idea and the film.', '让想法与成片，<br />保持联系。')}
+      subtitle={t(
+        'Our ad-video workflow brings three connected additions to the OpenMontage foundation. Available in the beta advertising pipeline.',
+        '在 OpenMontage 的制作基础上，织影将三项扩展串成广告创作流程。目前在 ad-video 测试版管线中提供。'
+      )}
+    />
+  </WidgetWrapper>
+  <Content id="intent" classes={{ container: 'py-10 md:py-14 lg:py-16' }}>
+    <Fragment slot="content">
+      <span class="text-[13px] text-primary tracking-wider uppercase"
+        >01 / {t('Intent, made explicit', '把意图说明白')}</span
+      >
+      <h2 class="mt-4 mb-6 text-3xl md:text-4xl leading-snug font-semibold text-heading">
+        {t('Agree on the direction', '先确认想要什么，')}<br />{t('before production begins.', '再进入制作。')}
+      </h2>
+      <p>
+        {
+          t(
+            'Turn an open-ended request into a structured creative brief. Review options, supply the details you care about, and explicitly delegate the rest. Interactive workspaces connect those decisions to the production documents.',
+            '将开放式需求整理成结构化创作需求。比较方案、补充在意的细节，也可以明确授权助手决定其余内容。交互工作区把这些选择连接到生产文档。'
+          )
+        }
+      </p>
+      <a
+        class="inline-block mt-6 text-sm text-primary underline underline-offset-4"
+        href={`${source}/skills/pipelines/ad-video/brief-enrichment-director.md`}
+        target="_blank"
+        rel="noreferrer">{t('Explore creative brief enrichment ↗', '查看需求细化流程 ↗')}</a
+      >
+    </Fragment>
+    <Fragment slot="image"
+      ><div
+        class="rounded-2xl border border-default/15 bg-default/5 p-5 md:p-9 [&_h3]:text-2xl [&_h3]:font-semibold [&_h3]:mb-6"
+      >
+        <div class="mb-5 md:mb-8 text-[11px] font-semibold tracking-widest uppercase text-primary">
+          {t('Illustrative flow / creative brief', '流程示意 / 创作需求')}
+        </div>
+        <h3>{t('What should this film feel like?', '这支片子，应当给人什么感受？')}</h3>
+        <div
+          class="flex justify-between items-center gap-4 border-t border-default/10 py-4 text-sm [&_span]:text-muted [&_strong]:font-medium [&_strong]:text-right"
+        >
+          <span>{t('Core message', '核心表达')}</span><strong>{t('Confirmed by you', '由你确认')}</strong>
+        </div>
+        <div
+          class="flex justify-between items-center gap-4 border-t border-default/10 py-4 text-sm [&_span]:text-muted [&_strong]:font-medium [&_strong]:text-right"
+        >
+          <span>{t('Audience & tone', '受众与基调')}</span><strong>{t('Compare and refine', '比较方案，再完善')}</strong
+          >
+        </div>
+        <div
+          class="flex justify-between items-center gap-4 border-t border-default/10 py-4 text-sm [&_span]:text-muted [&_strong]:font-medium [&_strong]:text-right"
+        >
+          <span>{t('Creative details', '创作细节')}</span><strong
+            >{t('Choose or delegate', '自行选择或明确授权')}</strong
+          >
+        </div>
+        <p class="mt-6 border-l-2 border-primary pl-4 text-sm text-muted">
+          {t('A structured brief carries the decisions forward.', '将确认后的选择，带入结构化创作需求。')}
+        </p>
+      </div></Fragment
+    >
+  </Content>
+  <Content id="knowledge" isReversed classes={{ container: 'py-10 md:py-14 lg:py-16' }}>
+    <Fragment slot="content">
+      <span class="text-[13px] text-primary tracking-wider uppercase"
+        >02 / {t('Knowledge, put to work', '让知识进入镜头')}</span
+      >
+      <h2 class="mt-4 mb-6 text-3xl md:text-4xl leading-snug font-semibold text-heading">
+        {t('Creative choices', '创意有依据，')}<br />{t('with a traceable reason.', '镜头有来由。')}
+      </h2>
+      <p>
+        {
+          t(
+            'Selected production knowledge and research references travel into the creative plan, script and shot list. Alignment checks verify that knowledge references and application notes are included in the script and shot plan.',
+            '选定的制作知识和调研依据，继续进入创作总纲、脚本与镜头说明。对齐检查会核验：知识引用与应用说明，是否完整带入脚本和镜头计划。'
+          )
+        }
+      </p>
+      <a
+        class="inline-block mt-6 text-sm text-primary underline underline-offset-4"
+        href={`${source}/lib/knowledge_alignment.py`}
+        target="_blank"
+        rel="noreferrer">{t('Explore knowledge alignment ↗', '查看知识对齐实现 ↗')}</a
+      >
+    </Fragment>
+    <Fragment slot="image"
+      ><div
+        class="rounded-2xl border border-default/15 bg-default/5 p-5 md:p-9 [&_h3]:text-2xl [&_h3]:font-semibold [&_h3]:mb-6"
+      >
+        <div class="mb-5 md:mb-8 text-[11px] font-semibold tracking-widest uppercase text-primary">
+          {t('Illustrative flow / connected decisions', '流程示意 / 让决策相互连接')}
+        </div>
+        <div
+          class="p-5 border border-default/10 rounded-xl bg-default/5 [&_small]:text-primary [&_small]:text-[11px] [&_small]:tracking-wider [&_p]:mt-1 [&_p]:text-lg"
+        >
+          <small>{t('RESEARCH', '调研依据')}</small><p>{t('Selected production knowledge', '选定的制作知识')}</p>
+        </div><span class="block px-5 py-2 text-muted" aria-hidden="true">↓</span>
+        <div
+          class="p-5 border border-default/10 rounded-xl bg-default/5 [&_small]:text-primary [&_small]:text-[11px] [&_small]:tracking-wider [&_p]:mt-1 [&_p]:text-lg"
+        >
+          <small>{t('CREATIVE PLAN', '创作总纲')}</small><p>
+            {t('A reason behind the creative choice', '创意选择及其依据')}
+          </p>
+        </div><span class="block px-5 py-2 text-muted" aria-hidden="true">↓</span>
+        <div
+          class="p-5 border border-default/10 rounded-xl bg-default/5 [&_small]:text-primary [&_small]:text-[11px] [&_small]:tracking-wider [&_p]:mt-1 [&_p]:text-lg"
+        >
+          <small>{t('SCRIPT → SHOT PLAN', '脚本 → 镜头计划')}</small><p>
+            {t('References that continue into the shot', '带着来源进入脚本与镜头')}
+          </p>
+        </div>
+      </div></Fragment
+    >
+  </Content>
+  <Content id="delivery" classes={{ container: 'py-10 md:py-14 lg:py-16' }}>
+    <Fragment slot="content">
+      <span class="text-[13px] text-primary tracking-wider uppercase"
+        >03 / {t('Intent, checked at delivery', '让要求进入交付')}</span
+      >
+      <h2 class="mt-4 mb-6 text-3xl md:text-4xl leading-snug font-semibold text-heading">
+        {t('Keep the agreed details', '制作可以迭代，')}<br />{t('in view as the film evolves.', '关键要求有据可查。')}
+      </h2>
+      <p>
+        {
+          t(
+            'Track approved product references, required visual moments and review evidence. Check the production plan against the rendering capabilities, and surface recorded blockers for review before delivery.',
+            '记录已批准的产品参考、必需视觉内容和审阅证据。检查镜头计划与渲染能力是否匹配，并在交付前暴露已记录的阻断问题，供进一步审阅。'
+          )
+        }
+      </p>
+      <a
+        class="inline-block mt-6 text-sm text-primary underline underline-offset-4"
+        href={`${source}/tools/validation/scene_fidelity_check.py`}
+        target="_blank"
+        rel="noreferrer">{t('Explore scene fidelity checks ↗', '查看镜头保真检查 ↗')}</a
+      >
+    </Fragment>
+    <Fragment slot="image"
+      ><div
+        class="rounded-2xl border border-default/15 bg-default/5 p-5 md:p-9 [&_h3]:text-2xl [&_h3]:font-semibold [&_h3]:mb-6"
+      >
+        <div class="mb-5 md:mb-8 text-[11px] font-semibold tracking-widest uppercase text-primary">
+          {t('Illustrative flow / review questions', '流程示意 / 交付检查项')}
+        </div>
+        <h3>{t('What was agreed. What was made.', '确认了什么，落实了什么。')}</h3>
+        <div
+          class="flex justify-between items-center gap-4 border-t border-default/10 py-4 text-sm [&_span]:text-muted [&_strong]:font-medium [&_strong]:text-right"
+        >
+          <span>{t('Product reference', '产品参考')}</span><strong>{t('Approved and used?', '已批准并使用？')}</strong>
+        </div>
+        <div
+          class="flex justify-between items-center gap-4 border-t border-default/10 py-4 text-sm [&_span]:text-muted [&_strong]:font-medium [&_strong]:text-right"
+        >
+          <span>{t('Required visual moments', '必需视觉内容')}</span><strong
+            >{t('Covered by the plan?', '镜头计划已覆盖？')}</strong
+          >
+        </div>
+        <div
+          class="flex justify-between items-center gap-4 border-t border-default/10 py-4 text-sm [&_span]:text-muted [&_strong]:font-medium [&_strong]:text-right"
+        >
+          <span>{t('Review evidence', '审阅证据')}</span><strong>{t('Available to inspect?', '是否可供检查？')}</strong>
+        </div>
+        <p class="mt-6 border-l-2 border-primary pl-4 text-sm text-muted">
+          {
+            t(
+              'Visual quality still requires review by people or reviewing agents.',
+              '实际画面的语义与质量，仍需人工或审阅智能体判断。'
+            )
+          }
+        </p>
+      </div></Fragment
+    >
+  </Content>
+  <WidgetWrapper id="gallery">
+    <Headline
+      tagline={t('Selected films', '成片展示')}
+      title={t('Different stories.<br />A shared creative toolkit.', '让不同的想法，<br />有不同的表达。')}
+      subtitle={t(
+        'Existing project examples, spanning product films, animation and cinematic scenes.',
+        '项目已有示例，覆盖产品短片、动画叙事与电影感场景。'
+      )}
+    />
+    <div
+      class="grid grid-cols-1 sm:grid-cols-2 gap-6 [&_video]:w-full [&_video]:aspect-video [&_video]:object-contain [&_video]:bg-page [&_video]:rounded-xl [&_video]:border [&_video]:border-default/15 [&_h3]:mt-4 [&_h3]:mb-1 [&_h3]:text-lg [&_p]:text-sm [&_p]:text-muted"
+    >
+      {
+        demos.map((demo) => (
+          <article>
+            <>
+              <video
+                controls
+                playsinline
+                preload="none"
+                poster={getAsset(`/static/images/demo${demo.id}_poster.jpg`)}
+                aria-label={demo.title}
+              >
+                <>
+                  <source src={`${media}/demo${demo.id}.mp4`} type="video/mp4" />
+                  <a href={`${media}/demo${demo.id}.mp4`}>{t('Watch video', '观看视频')}</a>
+                </>
+              </video>
+              <h3>{demo.title}</h3>
+              <p>{demo.text}</p>
+            </>
+          </article>
+        ))
+      }
+    </div>
+  </WidgetWrapper>
+  <Features
+    id="capabilities"
+    tagline={t('The production foundation', '完整的制作基础')}
+    title={t('The tools to bring it together.', '把制作所需，连接起来。')}
+    subtitle={t(
+      'Capabilities available across the project, including its OpenMontage foundation.',
+      '项目具备的通用制作能力，其中包含继承自 OpenMontage 的基础能力。'
+    )}
+    columns={3}
+    items={[
+      {
+        title: t('Multiple production paths', '多种制作路径'),
+        description: t(
+          'Workflows for product, narrative and other video formats.',
+          '面向产品、叙事等视频形态的工作流程。'
+        ),
+      },
+      {
+        title: t('Reference analysis', '参考视频分析'),
+        description: t('Study the pacing and visual language of a reference.', '分析参考作品的节奏与视觉语言。'),
+      },
+      {
+        title: t('Provider integrations', '生成服务接入'),
+        description: t('Connect generation providers through registered tools.', '通过注册工具接入不同生成服务。'),
+      },
+      {
+        title: t('Local composition', '本地合成'),
+        description: t(
+          'Rendering paths using Remotion, HyperFrames and FFmpeg.',
+          '使用 Remotion、HyperFrames 与 FFmpeg 的渲染路径。'
+        ),
+      },
+      {
+        title: t('Voice and captions', '配音与字幕'),
+        description: t('Bring spoken narration and timed text into the edit.', '将旁白与时间轴字幕纳入制作。'),
+      },
+      {
+        title: t('Review and cost controls', '审批与成本管理'),
+        description: t('Checkpoints and human review throughout production.', '通过检查点和人工审阅管理制作过程。'),
+      },
+    ]}
+  />
+  <QuickStart
+    id="quick-start"
+    terminalLabel={t('Terminal', '终端')}
+    tagline={t('Your next film starts here', '开始你的下一支作品')}
+    title={t('Bring an idea.<br />Open your coding assistant.', '带上想法，<br />打开你熟悉的 AI 助手。')}
+    subtitle={t(
+      'Clone the project, then follow the setup guide for Python 3.10+, Node.js 22+, FFmpeg and Make. Open the project in an AI coding assistant to begin.',
+      '克隆项目，按配置指南准备 Python 3.10+、Node.js 22+、FFmpeg 与 Make，然后在 AI 编程助手中打开项目。'
+    )}
+    commands={[
+      'git clone https://github.com/video-production-buddy/video-production-buddy.git',
+      'cd video-production-buddy',
+    ]}
+    copyLabel={t('Copy', '复制命令')}
+    copiedLabel={t('Copied', '已复制')}
+    copyErrorLabel={t('Copy failed. Please select and copy the command manually.', '复制失败，请手动选择并复制命令。')}
+    actions={[
+      {
+        text: t('Read the setup guide', '阅读配置指南'),
+        href: `${repo}#quick-start`,
+        target: '_blank',
+        variant: 'primary',
+        icon: 'tabler:arrow-up-right',
+      },
+    ]}
+    note={t(
+      'These commands only clone the project. Complete the setup guide before running make demo. Some generation providers require API credentials and charge for usage.',
+      '以上命令仅用于克隆项目；完成配置指南后再运行 make demo。部分生成服务需要 API 凭据，并按使用量收费。'
+    )}
+  />
+  <WidgetWrapper id="first-prompt" containerClass="max-w-3xl pt-0 md:pt-0 lg:pt-0">
+    <h2 class="text-xl font-semibold text-heading mb-4">{t('Try a first brief', '试着描述一个需求')}</h2>
+    <p class="border-l-2 border-primary pl-5 text-muted">
+      {
+        t(
+          'Help me plan a 15-second vertical product ad. First clarify the audience, key message and visual style with me. Ask for approval before using paid generation services.',
+          '帮我策划一支 15 秒的竖屏产品广告。先和我确认受众、核心卖点与视觉风格，调用付费生成服务前请先征求我的同意。'
+        )
+      }
+    </p>
+    <p class="mt-5 text-sm text-muted">
+      {
+        t(
+          'After setup, make demo runs the local demo without API keys; it does not exercise the full highlighted workflow.',
+          '完成环境配置后，make demo 可以运行无需 API 密钥的本地示例；它不演示这里重点介绍的完整流程。'
+        )
+      }
+    </p>
+  </WidgetWrapper>
+  <FAQs
+    schema
+    id="faq"
+    title={t('A few things to know.', '开始前，你可能想了解。')}
+    defaultOpen={-1}
+    items={[
+      {
+        title: t('How is VPB related to OpenMontage?', '织影与 OpenMontage 是什么关系？'),
+        description: t(
+          'VPB builds on OpenMontage. Its advertising workflow adds structured intent confirmation, knowledge alignment and delivery contracts. The shared production foundation remains part of the project.',
+          '织影基于 OpenMontage 扩展。广告流程增加了结构化意图确认、知识对齐与交付约束；共同的制作基础仍是项目的一部分。'
+        ),
+      },
+      {
+        title: t('Do all workflows include these additions?', '这些新增能力覆盖所有流程吗？'),
+        description: t(
+          'The three highlighted additions are most fully represented in the beta ad-video pipeline. Other production paths have different capabilities and review steps.',
+          '这里重点介绍的三项扩展，在测试版 ad-video 管线中实现最完整。其它制作路径具备的能力与审阅步骤有所不同。'
+        ),
+      },
+      {
+        title: t('Does passing a check guarantee visual quality?', '通过检查就意味着画面一定合格吗？'),
+        description: t(
+          'No. Contract checks verify requirements, provenance and recorded blockers. Visual meaning, product appearance and creative quality still need people or reviewing agents to inspect the actual output.',
+          '不能。约束检查核验需求、来源记录和已记录的阻断项。画面的实际含义、产品外观与创作质量，仍需人工或审阅智能体检查真实输出。'
+        ),
+      },
+    ]}
+  />
+</PageLayout>

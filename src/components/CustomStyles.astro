@@ -1,0 +1,37 @@
+---
+// Brand tokens live here, following AstroWind's styling guide.
+// Inter remains self-hosted through Astro's native Fonts API in Layout.astro.
+---
+
+<style is:inline>
+  :root {
+    --aw-font-sans: var(--font-inter), 'Noto Sans CJK SC', 'Microsoft YaHei', sans-serif;
+    --aw-font-serif: var(--aw-font-sans);
+    --aw-font-heading: var(--aw-font-sans);
+    --aw-color-primary: #486800;
+    --aw-color-secondary: #3c5700;
+    --aw-color-accent: #486800;
+    --aw-color-text-heading: #142015;
+    --aw-color-text-default: #253126;
+    --aw-color-text-muted: #536154;
+    --aw-color-bg-page: #f8faf6;
+    --aw-color-bg-page-dark: #0c100f;
+    --aw-color-on-primary: #ffffff;
+    color-scheme: light;
+  }
+  .dark {
+    --aw-color-primary: #b9ff2c;
+    --aw-color-secondary: #d0ff76;
+    --aw-color-accent: #b9ff2c;
+    --aw-color-text-heading: #f8faf6;
+    --aw-color-text-default: #e4e8e1;
+    --aw-color-text-muted: #a5ada5;
+    --aw-color-bg-page: #0c100f;
+    --aw-color-on-primary: #101800;
+    color-scheme: dark;
+  }
+  ::selection {
+    background-color: var(--aw-color-primary);
+    color: var(--aw-color-on-primary);
+  }
+</style>

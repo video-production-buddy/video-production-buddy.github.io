@@ -1,0 +1,8 @@
+{
+  "template": "https://github.com/arthelokyo/astrowind",
+  "commit": "49090a895de06cfbcde7bb1ef4d3bdfab93b790f",
+  "initializer": "create-astro@5.2.4",
+  "command": "npm exec --yes --package=create-astro@5.2.4 -- create-astro local/astrowind-migration --template arthelokyo/astrowind#49090a895de06cfbcde7bb1ef4d3bdfab93b790f --no-install --no-git --yes --skip-houston",
+  "method": "Official CLI initialization copied into the existing repository; original Git history retained. Not GitHub Use this template.",
+  "content_source_commit": "52a384b32e07d8deffc8593480130790bfad6ede"
+}

@@ -1,55 +1,88 @@
-import assert from "node:assert/strict";
-import { readFileSync } from "node:fs";
-import test from "node:test";
+import assert from 'node:assert/strict';
+import { readFileSync, existsSync, readdirSync } from 'node:fs';
+import { resolve, join } from 'node:path';
+import test from 'node:test';
 
-const html = readFileSync(new URL("../index.html", import.meta.url), "utf8");
-const script = readFileSync(new URL("../static/js/index.js", import.meta.url), "utf8");
-const css = readFileSync(new URL("../static/css/index.css", import.meta.url), "utf8");
+const dist = resolve('dist');
+const origin = 'https://video-production-buddy.github.io';
+const read = (path) => readFileSync(join(dist, path), 'utf8');
+const attrs = (tag) => Object.fromEntries([...tag.matchAll(/([\w:-]+)="([^"]*)"/g)].map((m) => [m[1], m[2]]));
+const elements = (html, tag) => [...html.matchAll(new RegExp(`<${tag}\\b[^>]*>`, 'g'))].map((m) => attrs(m[0]));
 
-test("default English content keeps the existing published copy", () => {
-  assert.match(html, /Video Production Buddy \| Agentic Video Production/);
-  assert.match(html, /Open-source AI video production assistant/);
-  assert.match(html, /AI-Driven,/);
-  assert.match(html, /Human-Curated/);
-  assert.match(html, /What it makes\./);
-  assert.match(html, /From launch reels to cinematic scenes\./);
-  assert.match(html, /Turn the vision in your mind precisely into a piece of art\./);
-  assert.match(html, /Set up in minutes\. Start producing now\./);
-  assert.match(html, /No new workflow to learn\. Open the repo with Claude Code, Codex, Cursor, Copilot, Windsurf, or an OpenClaw-style agent and start producing\./);
-  assert.match(html, /make setup/);
-  assert.match(html, /Create a 60-second commercial video for the 14-inch Apple MacBook Pro equipped with the M5 chip\./);
-});
+for (const { path, lang, locale } of [
+  { path: '/', lang: 'en', locale: 'en_US' },
+  { path: '/zh/', lang: 'zh-CN', locale: 'zh_CN' },
+]) {
+  test(`${lang}: generated page has production metadata and consistent language routes`, () => {
+    const html = read(`${path.slice(1)}index.html`);
+    assert.equal(elements(html, 'html')[0].lang, lang);
+    assert.equal(elements(html, 'h1').length, 1);
+    const links = elements(html, 'link');
+    assert.equal(links.find((l) => l.rel === 'canonical')?.href, origin + path);
+    for (const [hreflang, route] of [
+      ['en', '/'],
+      ['zh-CN', '/zh/'],
+      ['x-default', '/'],
+    ]) {
+      assert.equal(links.find((l) => l.hreflang === hreflang)?.href, origin + route);
+    }
+    const metas = elements(html, 'meta');
+    const meta = (name) => metas.find((m) => (m.name || m.property) === name)?.content;
+    assert.equal(meta('og:url'), origin + path);
+    assert.equal(meta('og:locale'), locale);
+    assert.equal(meta('og:image'), origin + '/static/images/social_preview.png');
+    assert.equal(meta('og:image:width'), '1200');
+    assert.equal(meta('og:image:height'), '630');
+    assert.ok(meta('description').length > 20 && meta('description').length <= 155);
+    assert.doesNotMatch(meta('robots') || '', /noindex|nofollow/);
+    assert.doesNotMatch(html, /astrowind\.vercel\.app|@arthelokyo|orcPxI47GSa|PreviewStyles|decapcms|Lorem ipsum/);
+    assert.ok(links.some((l) => l.rel === 'preload' && l.as === 'font'));
+    const schemas = [...html.matchAll(/<script[^>]*type="application\/ld\+json"[^>]*>(.*?)<\/script>/gs)].map((m) =>
+      JSON.parse(m[1])
+    );
+    assert.equal(schemas.find((s) => s['@type'] === 'WebSite')?.url, origin);
+    assert.equal(schemas.find((s) => s['@type'] === 'FAQPage')?.mainEntity.length, 3);
+  });
 
-test("removed second-pass content changes are not present", () => {
-  assert.doesNotMatch(html, /Open, governed AI video production/);
-  assert.doesNotMatch(html, /zero-key demo/i);
-  assert.doesNotMatch(html, /Visible provider\/model routing/);
-  assert.doesNotMatch(html, /Synced with the current repository/);
-  assert.doesNotMatch(html, /requirements-list/);
-  assert.doesNotMatch(html, /reveal-on-scroll/);
-  assert.doesNotMatch(css, /reveal-on-scroll/);
-  assert.doesNotMatch(script, /IntersectionObserver/);
-});
+  test(`${lang}: internal anchors and assets resolve; all five existing demos remain available`, () => {
+    const html = read(`${path.slice(1)}index.html`);
+    const ids = new Set([...html.matchAll(/\bid="([^"]+)"/g)].map((m) => m[1]));
+    for (const a of elements(html, 'a')) {
+      if (!a.href) continue;
+      assert.notEqual(a.href, '#');
+      if (a.href.startsWith('#')) assert.ok(ids.has(a.href.slice(1)), `Missing ${a.href}`);
+      else if (a.href.startsWith('/')) {
+        const file = a.href.endsWith('/') ? a.href + 'index.html' : a.href;
+        assert.ok(existsSync(join(dist, file)), `Missing ${file}`);
+      }
+    }
+    for (const img of elements(html, 'img')) {
+      if (img.src?.startsWith('/')) assert.ok(existsSync(join(dist, img.src)), `Missing ${img.src}`);
+    }
+    for (let i = 1; i <= 5; i++) {
+      assert.ok(html.includes(`/demo${i}.mp4`));
+      assert.ok(existsSync(join(dist, `static/images/demo${i}_poster.jpg`)));
+    }
+    assert.equal(elements(html, 'video').length, 4);
+    assert.equal(
+      elements(html, 'video').every((v) => v.preload === 'none'),
+      true
+    );
+    assert.ok(html.includes('52a384b32e07d8deffc8593480130790bfad6ede'));
+    assert.ok(html.includes('calesthio/OpenMontage'));
+    assert.ok(html.includes('Python 3.10+') && html.includes('Node.js 22+'));
+  });
+}
 
-test("hero figure is replaced by localized animated banner assets", () => {
-  assert.match(html, /id="heroBannerVideo"/);
-  assert.match(html, /static\/media\/hero\/en\/hero-banner-loop-en-v1-hd\.webm/);
-  assert.match(html, /static\/media\/hero\/en\/hero-banner-loop-en-v1-hd\.mp4/);
-  assert.match(html, /static\/media\/hero\/zh\/hero-banner-loop-zh-v1-hd\.webm/);
-  assert.match(html, /static\/media\/hero\/zh\/hero-banner-loop-zh-v1-hd\.mp4/);
-  assert.doesNotMatch(html, /hero-production-assistant\.png/);
-  assert.match(css, /\.hero-banner-video[^{]*\{[^}]*object-fit: contain;/s);
-  assert.match(script, /heroBannerVideo/);
-});
-
-test("Chinese language version is available while English stays default", () => {
-  assert.match(html, /<html[^>]+lang="en"/);
-  assert.match(html, /data-language-option="en"/);
-  assert.match(html, /data-language-option="zh-CN"/);
-  assert.match(html, /aria-label="Choose language"/);
-  assert.match(script, /const DEFAULT_LANGUAGE = "en"/);
-  assert.match(script, /window\.localStorage\.setItem\("vpb-language"/);
-  assert.match(script, /"nav.brand": "织影"/);
-  assert.match(script, /"hero.title": "织影"/);
-  assert.match(script, /"quick.title": "几分钟完成设置，马上开始制作。"/);
+test('sitemap and published routes contain no template sample pages', () => {
+  const files = readdirSync(dist, { recursive: true })
+    .map(String)
+    .filter((p) => p.endsWith('.html'))
+    .sort();
+  assert.deepEqual(files, ['404.html', 'index.html', 'zh/index.html']);
+  const sitemap = read('sitemap-0.xml');
+  const urls = [...sitemap.matchAll(/<loc>(.*?)<\/loc>/g)].map((m) => m[1]).sort();
+  assert.deepEqual(urls, [origin + '/', origin + '/zh/']);
+  assert.ok(read('robots.txt').includes(`${origin}/sitemap-index.xml`));
+  assert.match(read('404.html'), /noindex/);
 });
